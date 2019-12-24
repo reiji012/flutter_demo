@@ -140,3 +140,67 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+class CustomButtonsState extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return null;
+  }
+
+}
+
+class CustomButtons extends State<CustomButtonsState> {
+
+  _MyHomePageState view;
+
+  void _incrementCounter() {
+    view._incrementCounter();
+  }
+
+  void _decrementCounter() {
+    view._decrementCounter();
+  }
+
+  void _deleteAll() {
+    view._deleteAll();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Scaffold (
+      floatingActionButton: Column(
+        verticalDirection: VerticalDirection.up, // childrenの先頭を下に配置
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          FloatingActionButton(
+            backgroundColor: Colors.redAccent,
+            onPressed: _incrementCounter,
+            tooltip: 'Increment',
+            child: Icon(Icons.add),
+          ),
+          Container( // 余白のためContainerでラップ
+            margin: EdgeInsets.only(bottom: 16.0),
+            child: FloatingActionButton(
+              backgroundColor: Colors.amberAccent,
+              onPressed: _decrementCounter,
+              tooltip: 'Increment',
+              child: Icon(Icons.remove),
+            ),
+          ),
+          Container( // 余白のためContainerでラップ
+            margin: EdgeInsets.only(bottom: 16.0),
+            child: FloatingActionButton(
+              backgroundColor: Colors.green,
+              onPressed: _deleteAll,
+              tooltip: 'Increment',
+              child: Icon(Icons.delete),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+}
