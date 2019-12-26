@@ -23,9 +23,10 @@ class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
   final String title;
+  _MyHomePageState state = _MyHomePageState();
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyHomePageState createState() => state;
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -91,39 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: Row(
-        verticalDirection: VerticalDirection.up, // childrenの先頭を下に配置
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(bottom: 16.0, right: 10.0),
-            child: FloatingActionButton(
-              backgroundColor: Colors.red,
-              onPressed: _incrementCounter,
-              tooltip: 'Increment',
-              child: Icon(Icons.add),
-            ),
-          ),
-          Container( // 余白のためContainerでラップ
-            margin: EdgeInsets.only(bottom: 16.0, right: 10.0),
-            child: FloatingActionButton(
-              backgroundColor: Colors.amberAccent,
-              onPressed: _decrementCounter,
-              tooltip: 'Increment',
-              child: Icon(Icons.remove),
-            ),
-          ),
-          Container( // 余白のためContainerでラップ
-            margin: EdgeInsets.only(bottom: 16.0, right: 10.0),
-            child: FloatingActionButton(
-              backgroundColor: Colors.green,
-              onPressed: _deleteAll,
-              tooltip: 'Increment',
-              child: Icon(Icons.delete),
-            ),
-          ),
-        ],
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      floatingActionButton: CustomButtons(widget.state),// This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
@@ -141,18 +110,19 @@ class RandomWordsState extends State<RandomWords> {
   }
 }
 
-class CustomButtonsState extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    return null;
-  }
-
-}
-
-class CustomButtons extends State<CustomButtonsState> {
+class CustomButtons extends StatefulWidget {
 
   _MyHomePageState view;
+  CustomButtons(this.view);
+
+  @override
+  CustomButtonsState createState() => CustomButtonsState(view);
+}
+
+class CustomButtonsState extends State<CustomButtons> {
+
+  _MyHomePageState view;
+  CustomButtonsState(this.view);
 
   void _incrementCounter() {
     view._incrementCounter();
@@ -169,37 +139,35 @@ class CustomButtons extends State<CustomButtonsState> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold (
-      floatingActionButton: Column(
-        verticalDirection: VerticalDirection.up, // childrenの先頭を下に配置
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          FloatingActionButton(
-            backgroundColor: Colors.redAccent,
-            onPressed: _incrementCounter,
+    return Column (
+      verticalDirection: VerticalDirection.up, // childrenの先頭を下に配置
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        FloatingActionButton(
+          backgroundColor: Colors.redAccent,
+          onPressed: _incrementCounter,
+          tooltip: 'Increment',
+          child: Icon(Icons.add),
+        ),
+        Container( // 余白のためContainerでラップ
+          margin: EdgeInsets.only(bottom: 16.0),
+          child: FloatingActionButton(
+            backgroundColor: Colors.amberAccent,
+            onPressed: _decrementCounter,
             tooltip: 'Increment',
-            child: Icon(Icons.add),
+            child: Icon(Icons.remove),
           ),
-          Container( // 余白のためContainerでラップ
-            margin: EdgeInsets.only(bottom: 16.0),
-            child: FloatingActionButton(
-              backgroundColor: Colors.amberAccent,
-              onPressed: _decrementCounter,
-              tooltip: 'Increment',
-              child: Icon(Icons.remove),
-            ),
+        ),
+        Container( // 余白のためContainerでラップ
+          margin: EdgeInsets.only(bottom: 16.0),
+          child: FloatingActionButton(
+            backgroundColor: Colors.green,
+            onPressed: _deleteAll,
+            tooltip: 'Increment',
+            child: Icon(Icons.delete),
           ),
-          Container( // 余白のためContainerでラップ
-            margin: EdgeInsets.only(bottom: 16.0),
-            child: FloatingActionButton(
-              backgroundColor: Colors.green,
-              onPressed: _deleteAll,
-              tooltip: 'Increment',
-              child: Icon(Icons.delete),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
