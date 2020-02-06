@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'ThirdPage.dart';
 
 class SecondPage extends StatelessWidget {
   var list = ["one", "two", "three", "four"];
@@ -35,6 +36,17 @@ class SecondPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
+                child: RaisedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) {
+                        return ThirdPage();
+                      }),
+                    );
+                  },
+                  child: Text('Go Third'),
+                ),
                 height: cardHeight / 2,
               ),
               Container(
