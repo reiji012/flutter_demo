@@ -17,31 +17,54 @@ class HeroPage extends StatelessWidget {
       backgroundColor: Colors.transparent,
       body: Hero(
         tag: heroTag,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              imageView(context),
-              Container(
-                color: Colors.white,
-                height: 620,
-                child: ListView(
-                  // This next line does the trick.
-                  scrollDirection: Axis.vertical,
-                  children: <Widget>[
-                    for(var item in list ) Container (
-                        child: cell(item)
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
+        child: contents(context),
       )
     );
   }
 
+  Widget contents(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          imageView(context),
+          Align(
+            alignment: Alignment.topCenter,
+            child: Container(
+              color: Colors.white,
+              height: 620,
+              child: listView()
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget listView() {
+    return ListView(
+      // This next line does the trick.
+      scrollDirection: Axis.vertical,
+      children: <Widget>[
+        for(var item in list ) Column (
+          children: <Widget>[
+            cell(item),
+            Container(
+              margin: EdgeInsets.only(
+                  left: 20,
+                  right: 30
+              ),
+              child: Divider(
+                color: Colors.black,
+              ),
+            )
+          ],
+        ),
+      ],
+    );
+  }
+
+  // リストView用のCellWidget
   Widget cell(String title) {
     return Container(
       color: Colors.white,
@@ -62,23 +85,20 @@ class HeroPage extends StatelessWidget {
               style: TextStyle(fontSize: 30),
               semanticsLabel: 'aaa',
           ),
-          Divider(
-            height: 1,
-              color: Colors.black
-          )
         ],
       ),
     );
   }
 
+  // 画像Widget
   Widget imageView(BuildContext context) {
     double statusBarHeight = MediaQuery.of(context).padding.top;
     return Container(
-        height: 275,
+        height: 277,
         child: Container(
             child: Stack(
               children: <Widget>[
-                Image.asset('image/image.jpg'),
+                Image.asset('image/image.jpg', fit: BoxFit.cover,),
                 Container(
                   child: Column(
                     verticalDirection: VerticalDirection.down,

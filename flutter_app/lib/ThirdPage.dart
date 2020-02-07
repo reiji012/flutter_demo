@@ -29,7 +29,7 @@ class ThirdPage extends StatelessWidget {
         Text('Carousel $carouselIndex'),
         SizedBox(
           // you may want to use an aspect ratio here for tablet support
-          height: 238.0,
+          height: 217.0,
           child: PageView.builder(
             // store this controller in a State to save the carousel scroll position
             controller: PageController(viewportFraction: 0.8),
@@ -46,7 +46,7 @@ class ThirdPage extends StatelessWidget {
     String heroTag = "hero" + itemIndex.toString() + carouselIndex.toString();
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 4.0),
+      padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: Container(
         margin: EdgeInsets.only(
           bottom: 20,
@@ -68,7 +68,7 @@ class ThirdPage extends StatelessWidget {
               },
               child: Align(
                 alignment: Alignment.topCenter,
-                child: Image.asset('image/image.jpg', fit: BoxFit.fitHeight,),
+                child: Image.asset('image/image.jpg', fit: BoxFit.fill,),
               ),
             ),
             shape: RoundedRectangleBorder(
