@@ -86,6 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_comment',
               style: Theme.of(context).textTheme.display1,
             ),
+            Image.asset('image/s000_003.jpg'),
             RaisedButton(
               onPressed: () {
                 Navigator.push(

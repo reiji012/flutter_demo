@@ -43,6 +43,8 @@ class ThirdPage extends StatelessWidget {
   }
 
   Widget _buildCarouselItem(BuildContext context, int carouselIndex, int itemIndex) {
+    String heroTag = "hero" + itemIndex.toString() + carouselIndex.toString();
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 4.0),
       child: Container(
@@ -56,19 +58,17 @@ class ThirdPage extends StatelessWidget {
               print('Card tapped.');
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  settings: RouteSettings(name: "/rooms/<roomId>/edit"),
-                  builder: (BuildContext context) => HeroPage("hero" + itemIndex.toString() + carouselIndex.toString()),
-                  fullscreenDialog: true,
-                ),
-              );
+                  PageRouteBuilder(
+                      transitionDuration: Duration(milliseconds: 500),
+                      pageBuilder: (_, __, ___) => HeroPage(heroTag),
+              ));
             },
             child: Container(
               child: Center(
-                  child: Hero(
-                      tag: "hero" + itemIndex.toString() + carouselIndex.toString(),
-                      child: Icon(Icons.access_alarm)
-                  ),
+                child: Hero(
+                  tag: heroTag,
+                  child: Image.asset('image/image.jpg'),
+                ),
               ),
             ),
           ),
