@@ -17,6 +17,7 @@ class HeroPage extends StatelessWidget {
       backgroundColor: Colors.transparent,
       body: Hero(
         tag: heroTag,
+        transitionOnUserGestures: true,
         child: contents(context),
       )
     );
@@ -24,20 +25,24 @@ class HeroPage extends StatelessWidget {
 
   Widget contents(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          imageView(context),
-          Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-              color: Colors.white,
-              height: 620,
-              child: listView()
+      child: Material(
+        color: Colors.white,
+        type:  MaterialType.transparency,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            imageView(context),
+            Align(
+              alignment: Alignment.topCenter,
+              child: Container(
+                  color: Colors.white,
+                  height: 620,
+                  child: listView()
+              ),
             ),
-          )
-        ],
-      ),
+          ],
+        ),
+      )
     );
   }
 
@@ -80,11 +85,13 @@ class HeroPage extends StatelessWidget {
               },
             ),
           ),
-          Text(
+          Container(
+            child: Text(
               title,
               style: TextStyle(fontSize: 30),
-              semanticsLabel: 'aaa',
-          ),
+              maxLines: 2,
+            ),
+          )
         ],
       ),
     );
@@ -95,6 +102,7 @@ class HeroPage extends StatelessWidget {
     double statusBarHeight = MediaQuery.of(context).padding.top;
     return Container(
         height: 277,
+        color: Colors.white,
         child: Container(
             child: Stack(
               children: <Widget>[

@@ -53,29 +53,32 @@ class ThirdPage extends StatelessWidget {
         ),
         child: Hero(
           tag: heroTag,
-          child: Card(
-            clipBehavior: Clip.antiAlias,
-            child: InkWell(
-              splashColor: Colors.blue.withAlpha(30),
-              onTap: () {
-                print('Card tapped.');
-                Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                      transitionDuration: Duration(milliseconds: 700),
-                      pageBuilder: (_, __, ___) => HeroPage(heroTag),
-                    ));
-              },
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: Image.asset('image/image.jpg', fit: BoxFit.fill,),
+          child: Material(
+            type: MaterialType.transparency,
+            child: Card(
+              clipBehavior: Clip.antiAlias,
+              child: InkWell(
+                splashColor: Colors.blue.withAlpha(30),
+                onTap: () {
+                  print('Card tapped.');
+                  Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        transitionDuration: Duration(milliseconds: 700),
+                        pageBuilder: (_, __, ___) => HeroPage(heroTag),
+                      ));
+                },
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: Image.asset('image/image.jpg', fit: BoxFit.fill,),
+                ),
               ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              elevation:10,
             ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0),
-            ),
-            elevation:10,
-          ),
+          )
         ),
       )
     );
