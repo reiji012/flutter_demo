@@ -70,6 +70,7 @@ class SecondPage extends StatelessWidget {
     );
   }
 
+  // カードView
   Widget _customCard(String item, Size size) {
     return Container (
       width: size.width,

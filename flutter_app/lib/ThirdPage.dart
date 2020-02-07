@@ -29,7 +29,7 @@ class ThirdPage extends StatelessWidget {
         Text('Carousel $carouselIndex'),
         SizedBox(
           // you may want to use an aspect ratio here for tablet support
-          height: 200.0,
+          height: 238.0,
           child: PageView.builder(
             // store this controller in a State to save the carousel scroll position
             controller: PageController(viewportFraction: 0.8),
@@ -49,33 +49,33 @@ class ThirdPage extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 4.0),
       child: Container(
         margin: EdgeInsets.only(
-          bottom: 15,
+          bottom: 20,
         ),
-        child: Card(
-          child: InkWell(
-            splashColor: Colors.blue.withAlpha(30),
-            onTap: () {
-              print('Card tapped.');
-              Navigator.push(
-                context,
-                  PageRouteBuilder(
-                      transitionDuration: Duration(milliseconds: 500),
+        child: Hero(
+          tag: heroTag,
+          child: Card(
+            clipBehavior: Clip.antiAlias,
+            child: InkWell(
+              splashColor: Colors.blue.withAlpha(30),
+              onTap: () {
+                print('Card tapped.');
+                Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      transitionDuration: Duration(milliseconds: 700),
                       pageBuilder: (_, __, ___) => HeroPage(heroTag),
-              ));
-            },
-            child: Container(
-              child: Center(
-                child: Hero(
-                  tag: heroTag,
-                  child: Image.asset('image/image.jpg'),
-                ),
+                    ));
+              },
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Image.asset('image/image.jpg', fit: BoxFit.fitHeight,),
               ),
             ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
+            ),
+            elevation:10,
           ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.0),
-          ),
-          elevation:10,
         ),
       )
     );
