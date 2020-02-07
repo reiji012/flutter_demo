@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/HeroPage.dart';
 
-class ThirdPage extends StatelessWidget {
+class ThirdPage extends StatefulWidget {
+  static const routeName = 'animatedPadding';
+
+  @override
+  State<StatefulWidget> createState () {
+    // TODO: implement createState
+    return ThirdPageState();
+  }
+}
+
+class ThirdPageState extends State<ThirdPage> {
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Carousel in vertical scrollable'),
@@ -44,6 +56,8 @@ class ThirdPage extends StatelessWidget {
 
   Widget _buildCarouselItem(BuildContext context, int carouselIndex, int itemIndex) {
     String heroTag = "hero" + itemIndex.toString() + carouselIndex.toString();
+    var _hasElevation = false;
+    double padding = 0;
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -55,30 +69,34 @@ class ThirdPage extends StatelessWidget {
           tag: heroTag,
           child: Material(
             type: MaterialType.transparency,
-            child: Card(
-              clipBehavior: Clip.antiAlias,
-              child: InkWell(
-                splashColor: Colors.blue.withAlpha(30),
-                onTap: () {
-                  print('Card tapped.');
-                  Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                        transitionDuration: Duration(milliseconds: 700),
-                        pageBuilder: (_, __, ___) => HeroPage(heroTag),
-                      ));
-                },
-                child: Align(
-                  alignment: Alignment.topCenter,
-                  child: Image.asset('image/image.jpg', fit: BoxFit.fill,),
+            child: AnimatedPadding(
+              duration: Duration(milliseconds: 100),
+              padding: EdgeInsets.all(padding),
+              child: Card(
+                clipBehavior: Clip.antiAlias,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                elevation:10,
+                child: InkWell(
+                  splashColor: Colors.blue.withAlpha(30),
+                  onTap: () {
+                    print('Card tapped.');
+                    Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          transitionDuration: Duration(milliseconds: 700),
+                          pageBuilder: (_, __, ___) => HeroPage(heroTag),
+                        ));
+                  },
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: Image.asset('image/image.jpg', fit: BoxFit.fill),
+                  ),
                 ),
               ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.0),
-              ),
-              elevation:10,
             ),
-          )
+          ),
         ),
       )
     );
