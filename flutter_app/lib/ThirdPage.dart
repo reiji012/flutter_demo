@@ -4,6 +4,7 @@ import 'package:flutter_app/HeroPage.dart';
 class ThirdPage extends StatefulWidget {
   static const routeName = 'animatedPadding';
 
+
   @override
   State<StatefulWidget> createState () {
     // TODO: implement createState
@@ -12,6 +13,8 @@ class ThirdPage extends StatefulWidget {
 }
 
 class ThirdPageState extends State<ThirdPage> {
+  var list = [1, 2, 3, 4];
+
 
   @override
   Widget build(BuildContext context) {
@@ -20,17 +23,26 @@ class ThirdPageState extends State<ThirdPage> {
       appBar: AppBar(
         title: Text('Carousel in vertical scrollable'),
       ),
-      body: ListView.builder(
-        padding: EdgeInsets.symmetric(vertical: 16.0),
-        itemBuilder: (BuildContext context, int index) {
-          if(index % 2 == 0) {
-            return _buildCarousel(context, index ~/ 2);
-          }
-          else {
-            return Divider();
-          }
-        },
-      ),
+      body: Container(
+          decoration: BoxDecoration(
+            gradient: new LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              stops: [0.2, 0.6],
+              colors: [
+                Color.fromARGB(255, 72, 168, 255),
+                Color.fromARGB(255, 100, 115, 255),
+              ],
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              _buildCarousel(context, 1),
+            ],
+          )
+      )
     );
   }
 
@@ -40,14 +52,15 @@ class ThirdPageState extends State<ThirdPage> {
       children: <Widget>[
         Text('Carousel $carouselIndex'),
         SizedBox(
-          // you may want to use an aspect ratio here for tablet support
-          height: 217.0,
-          child: PageView.builder(
+          height: 300.0,
+          child: PageView(
             // store this controller in a State to save the carousel scroll position
             controller: PageController(viewportFraction: 0.8),
-            itemBuilder: (BuildContext context, int itemIndex) {
-              return _buildCarouselItem(context, carouselIndex, itemIndex);
-            },
+            children: <Widget>[
+              for(var itemIndex in list ) Container (
+                  child: _buildCarouselItem(context, carouselIndex, itemIndex)
+              ),
+            ],
           ),
         )
       ],
@@ -80,6 +93,14 @@ class ThirdPageState extends State<ThirdPage> {
                 elevation:10,
                 child: InkWell(
                   splashColor: Colors.blue.withAlpha(30),
+                  onLongPress: () {
+                    setState(() {
+                      _hasElevation = !_hasElevation;
+                      padding = _hasElevation ? 50 : 0;
+                      print(_hasElevation);
+                      print(padding);
+                    });
+                  },
                   onTap: () {
                     print('Card tapped.');
                     Navigator.push(
