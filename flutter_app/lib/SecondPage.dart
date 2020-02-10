@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'ThirdPage.dart';
+import 'AnimationDemo.dart';
 
 class SecondPage extends StatelessWidget {
   var list = ["one", "two", "three", "four"];
@@ -47,7 +48,21 @@ class SecondPage extends StatelessWidget {
                   },
                   child: Text('Go Third'),
                 ),
-                height: cardHeight / 2,
+                height: cardHeight / 4,
+              ),
+              Container (
+                child: RaisedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) {
+                        return AnimatedPaddingPage();
+                      }),
+                    );
+                  },
+                  child: Text('Go AnimationPage'),
+                ),
+                height: cardHeight / 4,
               ),
               Container(
                 height: cardHeight,
