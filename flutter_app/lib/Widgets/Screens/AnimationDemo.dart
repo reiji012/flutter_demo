@@ -1,4 +1,4 @@
-import 'AppScaffold.dart';
+import '../Components/AppScaffold.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedPaddingPage extends StatefulWidget {

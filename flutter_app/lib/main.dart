@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'SecondPage.dart';
+import 'Widgets/Screens/SecondPage.dart';
+import 'Widgets/Screens/Nuemorphism.dart';
 
 void main() => runApp(MyApp());
 
@@ -96,6 +97,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
               child: Text('Go Second'),
+            ),
+            RaisedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return Neumorphism(backgroundScreenColor: Colors.white,);
+                  }),
+                );
+              },
+              child: Text('Go Nuemorphosm'),
             ),
           ],
         ),
