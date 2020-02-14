@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:flutter_app/Widgets/Components/flutter_slack_oauth.dart';
 import 'package:flutter_slack_oauth_firebase/flutter_slack_oauth_firebase.dart';
+import 'package:flutter_slack_oauth/flutter_slack_oauth.dart';
+import 'package:flutter_slack_oauth/oauth/slack.dart' as slack;
 
 class ApiDemo extends StatefulWidget {
   @override
@@ -42,13 +43,19 @@ class ApiDemoState extends State<ApiDemo> {
         color: Colors.white,
         child: Center(
           child: SlackButton(
-            clientId: '952564208582.949903146836',
-            clientSecret: '8a6d2873c5f5f288e5c76fa394687e32',
-            redirectUrl: 'https://kunstmaan.github.io/flutter_slack_oauth/success.html',
+            clientId: '952564208582.952106366165',
+            clientSecret: 'fe953f6c8b1f3f534e94179836567e9b',
+            redirectUrl: 'https://hooks.slack.com/services/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',
             onSuccess: () async {
               String accessToken = await Token.getLocalAccessToken();
 
+              String chatId = "CU0GL6QT0";
+//              UserList users = await slack.getUsers(accessToken);
+              UserList chats = await slack.getConversations(accessToken, chatId);
+//              print(users);
+              print(chats);
               Scaffold.of(context).showSnackBar(new SnackBar(
+//                content: new Text('We found ' + users.users.length.toString() + " users"),
               ));
             },
             onFailure: () {
