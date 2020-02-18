@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_slack_oauth_firebase/flutter_slack_oauth_firebase.dart';
 import 'package:flutter_slack_oauth/flutter_slack_oauth.dart';
-import 'package:flutter_slack_oauth/oauth/slack.dart' as slack;
+import '../../API/slack_request.dart' as slack;
+import '../../Model/slack_history.dart';
+import 'SlackChat.dart';
 
 class ApiDemo extends StatefulWidget {
   @override
@@ -50,13 +52,16 @@ class ApiDemoState extends State<ApiDemo> {
               String accessToken = await Token.getLocalAccessToken();
 
               String chatId = "CU0GL6QT0";
-//              UserList users = await slack.getUsers(accessToken);
-              UserList chats = await slack.getConversations(accessToken, chatId);
-//              print(users);
+              UserList users = await getUsers(accessToken);
+              ConversationsHistory chats = await slack.getConversations(accessToken, chatId);
+              print(users);
               print(chats);
-              Scaffold.of(context).showSnackBar(new SnackBar(
-//                content: new Text('We found ' + users.users.length.toString() + " users"),
-              ));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) {
+                  return SlackChat(users, chats);
+                }),
+              );
             },
             onFailure: () {
               Scaffold.of(context).showSnackBar(new SnackBar(
