@@ -16,7 +16,6 @@ class ThirdPage extends StatefulWidget {
 
 class ThirdPageState extends State<ThirdPage> {
   var list = [1, 2, 3, 4];
-  var _hasPadding = false;
 
   @override
   Widget build(BuildContext context) {
@@ -27,15 +26,6 @@ class ThirdPageState extends State<ThirdPage> {
       ),
       body: Container(
           decoration: BoxDecoration(
-//            gradient: new LinearGradient(
-//              begin: Alignment.topCenter,
-//              end: Alignment.bottomCenter,
-//              stops: [0.2, 0.6],
-//              colors: [
-//                Color.fromARGB(255, 72, 168, 255),
-//                Color.fromARGB(255, 100, 115, 255),
-//              ],
-//            ),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,7 +61,6 @@ class ThirdPageState extends State<ThirdPage> {
 
   Widget _buildCarouselItem(BuildContext context, int carouselIndex, int itemIndex) {
     String heroTag = "hero" + itemIndex.toString() + carouselIndex.toString();
-    double padding = 0;
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.0),
